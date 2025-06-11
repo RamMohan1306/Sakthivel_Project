@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator with Google Maps</title>
+    <title>on hospital</title>
+ <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+        #qrCode {
+            margin-top: 20px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 5px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>QR Code Generator</h1>
+    <input type="text" id="text" placeholder="Enter text for QR code" />
+    <input type="text" id="text" placeholder="Enter name" />
+    <input type="text" id="text" placeholder="Enter blood group" />
+    <input type="text" id="text" placeholder="Enter address" />
+    <input type="text" id="text" placeholder="Enter emergency number" />
+    <input type="text" id="text" placeholder="Enter text side effect" />
+    <input type="text" id="gmap" placeholder="Enter www.google.com/map/search/nearby+hospital" />
+    <button onclick="generateQRCode()">Generate QR Code</button>
+    <div id="qrCode"></div>
+
+    <!-- QR Code JavaScript Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        function generateQRCode() {
+            const qrCodeContainer = document.getElementById("qrCode");
+            qrCodeContainer.innerHTML = ""; // Clear any existing QR code
+
+            const text = document.getElementById("text").value.trim();
+            const gmap = document.getElementById("gmap").value.trim();
+            
+            if (!text && !gmap) {
+                alert("Please enter either text or a Google Maps link to generate a QR code.");
+                return;
+            }
+
+            const qrData = gmap ? gmap : text; // Prefer Google Maps link if provided
+
+            new QRCode(qrCodeContainer, {
+                text: qrData,
+                width: 200,
+                height: 200,
+            });
+        }
+    </script>
+</body>
+</html>
